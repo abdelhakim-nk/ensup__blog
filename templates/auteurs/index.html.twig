@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AuteursController!{% endblock %}
+
+{% block body %}
+<style>
+    .articleContainer {  max-width: 700px; font: 20px sans-serif; border: 1px solid black; border-radius: 20px; }
+    .articleContainer ul li {list-style: none; margin-top: 30px}
+    .articleTitle { text-align: center }
+</style>
+
+<button><a href="{{ path('app_articles') }}">Espace User</a></button>
+<button><a href="{{ path('admin_article') }}">Afficher le(s) Article(s)</a></button>
+<button><a href="{{ path('app_article_create') }}">Créer un nouvel article</a></button>
+<button><a href="{{ path('app_auteur_create') }}">Créer un nouvel Auteur</a></button>
+
+
+
+<div>
+    <h1>Espace Admin: Liste des Auteurs</h1>
+    {% for message in app.flashes('success') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for auteur in auteurs %}
+        <div class="articleContainer">
+            <ul>
+                    <li class="articleTitle"><h2>{{ auteur.nom }}</h2></li>
+                    <li>{{ auteur.email }}</li>
+                    <button><a href="{{ path('app_auteur_delete', {'id': auteur.id}) }}">Supprimer</a></button>
+                    <button><a href="{{ path('app_auteur_update', {'id': auteur.id}) }}">Modifier</a></button>
+            </ul>
+        <div>
+    {% endfor %}
+</div>
+{% endblock %}

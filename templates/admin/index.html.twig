@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+<style>
+    .articleContainer {  max-width: 700px; font: 20px sans-serif; border: 1px solid black; border-radius: 20px; }
+    .articleContainer ul li {list-style: none; margin-top: 30px}
+    .articleTitle { text-align: center }
+</style>
+
+<button><a href="{{ path('app_articles') }}">Espace User</a></button>
+<button><a href="{{ path('app_auteurs') }}">Afficher le(s) Auteur(s)</a></button>
+<button><a href="{{ path('app_article_create') }}">Créer un nouvel article</a></button>
+<button><a href="{{ path('app_auteur_create') }}">Créer un nouvel Auteur</a></button>
+
+
+
+<div>
+    <h1>Espace Admin: Liste des articles</h1>
+    {% for message in app.flashes('success') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for article in articles %}
+        <div class="articleContainer">
+            <ul>
+                    <li class="articleTitle"><h2>{{ article.titre }}</h2></li>
+                    <li>{{ article.contenu }}</li>
+                    <li>Auteur de l'article: {{ article.auteur.nom }}</li>
+                    <li>Date de publication: {{ article.datePublication|date('d/m/Y') }}</li>
+                <button><a href="{{ path('app_article_delete', {'id': article.id}) }}">Supprimer</a></button>
+                <button><a href="{{ path('app_article_update', {'id': article.id}) }}">Modifier</a></button>
+            </ul>
+        <div>
+    {% endfor %}
+</div>
+{% endblock %}

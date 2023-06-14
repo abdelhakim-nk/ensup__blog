@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<button><a href="{{ path('admin_article') }}">Afficher le(s) Article(s)</a></button>
+
+    <h1> Créer un nouvel Article</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}
